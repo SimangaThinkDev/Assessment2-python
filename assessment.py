@@ -14,8 +14,10 @@ def calculate_rectangle_area(length: int or float, width: int or float) -> int o
 
     Learning Outcomes: Functions, Basic error handling (simple conditional check).
     """
-    pass
-
+    
+    if length < 0 or width < 0:
+        return 0
+    return length * width
 
 
 def sum_even_numbers(numbers_list: list)-> int:
@@ -31,7 +33,7 @@ def sum_even_numbers(numbers_list: list)-> int:
 
     Learning Outcomes: Functions, Basic loops (for), Processing data (list iteration, conditional).
     """
-    pass
+    return sum( [ num for num in numbers_list if num % 2 == 0 ] )
 
 
 def find_first_occurrence(data_list:list, target_value: any) -> int:
@@ -48,7 +50,9 @@ def find_first_occurrence(data_list:list, target_value: any) -> int:
 
     Learning Outcomes: Functions, Basic loops (for/while), Processing data (list search).
     """
-    pass
+    if target_value not in data_list:
+        return -1
+    return data_list.index(target_value)
 
 
 def safe_string_to_int(input_string: str) -> int or None:
@@ -64,7 +68,11 @@ def safe_string_to_int(input_string: str) -> int or None:
 
     Learning Outcomes: Functions, Basic error handling (try-except ValueError).
     """
-    pass
+    try:
+        result = int( input_string )
+        return result
+    except ValueError:
+        return
 
 
 def reverse_string_list_comprehension(text: str) -> str:
@@ -80,7 +88,7 @@ def reverse_string_list_comprehension(text: str) -> str:
 
     Learning Outcomes: Functions, Processing data (strings, potentially list comprehension or slicing), Simple algorithms.
     """
-    pass
+    return text[::-1]
 
 def count_characters_above_threshold(text: str, threshold: int) -> int:
     """
@@ -100,4 +108,23 @@ def count_characters_above_threshold(text: str, threshold: int) -> int:
 
     Learning Outcomes: Functions, Basic loops, Processing data (strings, dictionaries/counters), Simple algorithms.
     """
-    pass
+    text = text.lower()
+    values = {}
+    
+    for char in text:
+        try:
+            values[char] += 1
+        except KeyError:
+            values[char] = 1
+        
+    print( values )
+        
+    result = 0
+        
+    for key, value in values.items():
+        if value > threshold:
+            result += 1
+            
+    return result
+
+print( count_characters_above_threshold( "aabbc", 1 ) )
